@@ -41,7 +41,6 @@ def read_and_process_excel(file_path):
 def save_to_sqlite(df, db_path):
     try:
         # Ensure the directory exists
-        print(db_path)
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
         
         # Connect to SQLite database (or create it if it doesn't exist)
@@ -72,8 +71,7 @@ def save_to_sqlite(df, db_path):
         print(f"Error saving data to SQLite: {e}")
         raise
 
-def fetch_data():
-    url = 'https://www.eia.gov/dnav/pet/hist_xls/EMM_EPM0_PTE_NUS_DPGw.xls'
+def fetch_data(url):
     local_file_path = os.path.join(os.path.dirname(__file__), '../../data/gasoline_price.xls')
     db_path = os.path.join(os.path.dirname(__file__), '../../data/gasoline_prices.db')
     
@@ -86,4 +84,5 @@ def fetch_data():
         print(f"An error occurred in the fetch_data pipeline: {e}")
 
 if __name__ == "__main__":
-    fetch_data()
+    url = 'https://www.eia.gov/dnav/pet/hist_xls/EMM_EPM0_PTE_NUS_DPGw.xls'
+    fetch_data(url)
