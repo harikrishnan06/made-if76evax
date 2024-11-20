@@ -3,9 +3,9 @@
     CountryData ->   HeaderUpdate -> GdpPerCapita_data -> DbLoad_GdpPerCapita_dataa;
     HeaderUpdate -> BondIssuance_data -> DbLoad_BondIssuance_data;
 
-    valuetype CountryCodeAlpha3 oftype text {
-        constraints: [CountryCodeAlpha3];
-    }
+//    valuetype CountryCodeAlpha3 oftype text {
+//        constraints: [CountryCodeAlpha3];
+//    }
     valuetype GdpPerCapita_DataType oftype decimal {
         constraints: [GDPperCapita];
     }
@@ -60,7 +60,7 @@
 }
 
  //publish constraint GDPperCapita oftype  RangeConstraint {
-   lowerBound: 0;
+//   lowerBound: 0;
  
  //}
  publish constraint GDPperCapita on decimal: value >= 0;
