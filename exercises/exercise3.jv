@@ -77,7 +77,7 @@
 }
 
  publish constraint BoundInsuranceShare oftype RegexConstraint {
-   regex: /^0\.\d+$|1(\.0+)?$/;
+   regex: /^0(\.\d+)?$|^1(\.0+)?$/;
 }
  composite blocktype DataExtractor {
 
