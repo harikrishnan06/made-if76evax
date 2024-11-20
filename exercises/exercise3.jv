@@ -27,11 +27,6 @@
         ];
     }
  
-    block DbLoad_data oftype SQLiteLoader {
-        table: "All";
-        file: "./country-stats.sqlite";
-        dropTable: false;
-    }
     block BondIssuance_data oftype TableInterpreter {
        header : true;
         columns: [
