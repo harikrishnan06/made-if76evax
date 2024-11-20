@@ -98,7 +98,7 @@
        sheetName: "Figure S5.1.2";
      }
       block CountryStatInterperterDataSelector oftype CellRangeSelector {
-       select: range P2:S*;
+       select: range P2:S45;
     }   
 }
      
