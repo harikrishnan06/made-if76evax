@@ -28,7 +28,7 @@
     }
 
     block BondIssuance_data oftype TableInterpreter {
-       header : true;
+       header : false;
         columns: [
             "Country Code" oftype CountryCodeAlpha3,
             "Bond Issuance Share" oftype BoundInsuranceShare_DataType,
@@ -42,7 +42,7 @@
         dropTable: false;
     }
     block GdpPerCapita_data oftype TableInterpreter {
-       header : true;
+       header : false;
         columns: [
             "Economy" oftype text,
             "GDP per Capita" oftype GdpPerCapita_DataType,
