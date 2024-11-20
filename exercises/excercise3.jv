@@ -1,0 +1,109 @@
+ pipeline CountryStatPipeline {
+ 
+    CountryData ->   HeaderUpdate -> GdpPerCapita_data -> DbLoad_GdpPerCapita_dataa;
+    HeaderUpdate -> BondIssuance_data -> DbLoad_BondIssuance_data;
+
+    valuetype CountryCodeAlpha3 oftype text {
+        constraints: [CountryCodeAlpha3];
+    }
+    valuetype GdpPerCapita_DataType oftype text {
+        constraints: [GDPperCapita];
+    }
+    valuetype BoundInsuranceShare_DataType oftype text {
+        constraints: [BoundInsuranceShare];
+    }
+
+
+    block CountryData oftype DataExtractor {
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+     block HeaderUpdate oftype CellWriter {
+        at: range A1:D1;  
+        write: [
+            "Country Code",
+            "Economy",
+            "GDP per Capita",
+            "Bond Issuance Share"
+        ];
+    }
+    //DEBUG -ONLY
+    block all_data oftype TableInterpreter {
+       header : true;
+        columns: [
+            "Country Code" oftype text,
+            "Economy" oftype text,
+            "GDP per Capita" oftype text,
+             "Bond Issuance Share" oftype text,
+        ];
+    }
+    //DEBUG -ONLY
+    block DbLoad_data oftype SQLiteLoader {
+        table: "All";
+        file: "./country-stats.sqlite";
+        dropTable: false;
+    }
+    block BondIssuance_data oftype TableInterpreter {
+       header : true;
+        columns: [
+            "Country Code" oftype CountryCodeAlpha3,
+            "Bond Issuance Share" oftype BoundInsuranceShare_DataType,
+        ];
+    }
+    block DbLoad_BondIssuance_data oftype SQLiteLoader {
+        table: "bondIssuance";
+        file: "./country-stats.sqlite";
+        dropTable: false;
+    }
+    block GdpPerCapita_data oftype TableInterpreter {
+       header : true;
+        columns: [
+            "Economy" oftype text,
+            "GDP per Capita" oftype GdpPerCapita_DataType,
+        ];
+    }
+    block DbLoad_GdpPerCapita_dataa oftype SQLiteLoader {
+        table: "gdpPerCapita";
+        file: "./country-stats.sqlite";
+        dropTable: false;
+    }
+ }
+
+ publish constraint CountryCodeAlpha3 oftype RegexConstraint {
+   regex: /^[A-Za-z]{3}$/;
+}
+
+ publish constraint GDPperCapita oftype RegexConstraint {
+   regex: /^[+]?(?:\d*\.\d+|\d+)$/;
+}
+
+ publish constraint BoundInsuranceShare oftype RegexConstraint {
+   regex: /^0\.\d+$|1(\.0+)?$/;
+}
+ composite blocktype DataExtractor {
+
+    property url oftype text;
+      
+    input inputName oftype None;
+    output outputName oftype Sheet;
+
+    inputName -> 
+    FetchData  -> 
+    CountryStatInterperter -> 
+    CountryStatInterperterSheetPick -> 
+    CountryStatInterperterDataSelector -> 
+    outputName;
+
+    
+    block FetchData oftype HttpExtractor {
+        url : "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+    block CountryStatInterperter oftype XLSXInterpreter {    
+    }
+    block CountryStatInterperterSheetPick oftype SheetPicker {
+       sheetName: "Figure S5.1.2";
+     }
+      block CountryStatInterperterDataSelector oftype CellRangeSelector {
+       select: range P2:S*;
+    }   
+}
+     
