@@ -26,17 +26,7 @@
             "Bond Issuance Share"
         ];
     }
-    //DEBUG -ONLY
-    block all_data oftype TableInterpreter {
-       header : true;
-        columns: [
-            "Country Code" oftype text,
-            "Economy" oftype text,
-            "GDP per Capita" oftype text,
-             "Bond Issuance Share" oftype text,
-        ];
-    }
-    //DEBUG -ONLY
+ 
     block DbLoad_data oftype SQLiteLoader {
         table: "All";
         file: "./country-stats.sqlite";
@@ -69,7 +59,7 @@
  }
 
  publish constraint CountryCodeAlpha3 oftype RegexConstraint {
-   regex: /^[A-Za-z]{3}$/;
+   regex: /^[A-Z]{3}$/;
 }
 
  publish constraint GDPperCapita oftype  RangeConstraint {
