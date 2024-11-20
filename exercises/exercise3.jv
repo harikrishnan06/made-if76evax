@@ -59,13 +59,19 @@
    regex: /^[A-Z]{3}$/;
 }
 
- publish constraint GDPperCapita oftype  RangeConstraint {
+ //publish constraint GDPperCapita oftype  RangeConstraint {
    lowerBound: 0;
  
- }
+ //}
+ publish constraint GDPperCapita on decimal: value >= 0;
+ 
+ //}
+
  publish constraint BoundInsuranceShare oftype  RangeConstraint {
-   lowerBound: 0;
-   upperBound: 1;
+        lowerBound: 0;
+        lowerBoundInclusive: true;
+        upperBound: 1;
+        upperBoundInclusive: true;
  
  }
  composite blocktype DataExtractor {
