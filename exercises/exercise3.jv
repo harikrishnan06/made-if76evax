@@ -6,10 +6,10 @@
     valuetype CountryCodeAlpha3 oftype text {
         constraints: [CountryCodeAlpha3];
     }
-    valuetype GdpPerCapita_DataType oftype text {
+    valuetype GdpPerCapita_DataType oftype decimal {
         constraints: [GDPperCapita];
     }
-    valuetype BoundInsuranceShare_DataType oftype text {
+    valuetype BoundInsuranceShare_DataType oftype decimal {
         constraints: [BoundInsuranceShare];
     }
 
@@ -72,13 +72,15 @@
    regex: /^[A-Za-z]{3}$/;
 }
 
- publish constraint GDPperCapita oftype RegexConstraint {
-   regex: /^[+]?(?:\d*\.\d+|\d+)$/;
-}
-
- publish constraint BoundInsuranceShare oftype RegexConstraint {
-   regex: /^0(\.\d+)?$|^1(\.0+)?$/;
-}
+ publish constraint GDPperCapita oftype  RangeConstraint {
+   lowerBound: 0;
+ 
+ }
+ publish constraint BoundInsuranceShare oftype  RangeConstraint {
+   lowerBound: 0;
+   upperBound: 1;
+ 
+ }
  composite blocktype DataExtractor {
 
     property url oftype text;
