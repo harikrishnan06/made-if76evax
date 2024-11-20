@@ -44,7 +44,7 @@
     block GdpPerCapita_data oftype TableInterpreter {
        header : true;
         columns: [
-            "Economy" oftype text,
+             "Country Code" oftype CountryCodeAlpha3,
             "GDP per Capita" oftype GdpPerCapita_DataType,
         ];
     }
