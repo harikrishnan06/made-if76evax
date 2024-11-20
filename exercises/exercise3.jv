@@ -31,7 +31,8 @@
        header : true;
         columns: [
             "Country Code" oftype CountryCodeAlpha3,
-             "GDP per Capita" oftype GdpPerCapita_DataType,
+            "Bond Issuance Share" oftype BoundInsuranceShare_DataType,
+          
           
         ];
     }
@@ -44,7 +45,7 @@
        header : true;
         columns: [
             "Economy" oftype text,
-            "Bond Issuance Share" oftype BoundInsuranceShare_DataType,
+            "GDP per Capita" oftype GdpPerCapita_DataType,
         ];
     }
     block DbLoad_GdpPerCapita_dataa oftype SQLiteLoader {
