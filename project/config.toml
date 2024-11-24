@@ -1,2 +1,21 @@
-[dataset]
+[gas_price_dataset]
 gas_data_url = "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPM0_PTE_NUS_DPGw.xls"
+
+
+[ev_sales_dataset]
+ev_data_url = "https://www.atlasevhub.com/public/dmv/ca_ev_registrations_public.csv"
+
+[settings]
+gas_data_url = "https://www.eia.gov/dnav/pet/hist_xls/EMM_EPM0_PTE_NUS_DPGw.xls"
+ev_sales_data_url = "https://www.atlasevhub.com/public/dmv/wa_ev_registrations_public.csv"
+data_dir = "C:/Users/harik/Desktop/MADE/made-if76evax/data"
+gas_data_file = "raw_Gas.xls"
+ev_sales_data_file = "raw_ev_sales.csv"
+gas_db_file = "raw_Gas.database.db"
+ev_sales_db_file = "ev_sales.db"
+gas_output_csv_file = "cropped_gas_data.csv"
+ev_output_csv_file = "cropped_ev_data.csv"
+merged_output_csv_file = "merged_data.csv"
+log_file = "mismatch_log.txt"
+sep_log_file = "separation_log.txt"
+merged_db_file = "merged_data.db"

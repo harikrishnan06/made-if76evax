@@ -17,10 +17,10 @@ else
     exit 1
 fi
 
-# Multi agent support for Runner
+# Multi agent support for Runner python -m unittest test_fetch_data.py  python project/main.py
 if try_command python project/main.py; then
-    echo "used windows runner"
-elif try_command python3 project/main.py; then
+   echo "used windows runner"
+elif try_command python -m unittest project/test_fetch_data.py; then
     echo "used linux/mac runner"
 else
     echo "Failed"
