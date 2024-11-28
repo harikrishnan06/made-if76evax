@@ -4,10 +4,10 @@
 **Impact of Gas Prices on E-Mobility Adoption and CO₂ Emissions in the Americas**
 
 ## Main Question
-How do fluctuations in gas prices influence the adoption of e-mobility and its subsequent impact on CO₂ emissions across regions in the Americas?
+How do fluctuations in gas prices influence the adoption of e-mobility  across regions in the Americas?
 
 ## Description
-This project investigates the relationship between gas prices, e-mobility adoption, and CO₂ emissions in the Americas. As fuel costs fluctuate, they can significantly impact consumer choices, particularly the shift towards electric vehicles (EVs). This analysis will use data on gas prices, EV adoption rates, and CO₂ emissions to explore how rising or falling gas prices affect the rate at which regions transition to e-mobility and reduce emissions. By employing statistical analysis and visualizations, the project aims to reveal patterns that could guide policymakers and industry stakeholders in fostering sustainable transportation initiatives.
+This project explores the relationship between gas prices and electric vehicle (EV) adoption in the United States. The hypothesis is that rising gas prices encourage EV adoptiondue to cost-saving motivations. A data pipeline was developed to preprocess, transform, and merge gas price and EV sales datasets for comprehensive analysis.
 
 ## Datasources
 ### Datasource1: EIA Gas Price Data
@@ -17,10 +17,12 @@ This project investigates the relationship between gas prices, e-mobility adopti
 * **Description**: Historical gas prices from the US Energy Information Administration, capturing weekly changes over time. This data is essential for analyzing the correlation between gas prices and EV adoption trends.
 
 ### Datasource2: Vehicles sales and CO2 emission data
-* **Metadata URL**:  
-* **Dataset Direct URL**:  
-* **Data Type**: XLS
-* **Description**:  
+* **Metadata URL**: [EV sales in diff states](https://www.atlasevhub.com/materials/state-ev-registration-data/#data)
+* **Dataset Direct URL**: [EV sales (CSV)](https://www.atlasevhub.com/materials/state-ev-registration-data/#data)
+* **Data Type**: CSV
+* **Description**: Registration of EV vehicle in US 
+
+
 ## Work Packages
 
 1. **Brainstorming** - Define the scope, objectives, and key research questions. [Issue #1][i1]
