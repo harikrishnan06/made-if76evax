@@ -16,7 +16,7 @@ This project explores the relationship between gas prices and electric vehicle (
 * **Data Type**: XLS
 * **Description**: Historical gas prices from the US Energy Information Administration, capturing weekly changes over time. This data is essential for analyzing the correlation between gas prices and EV adoption trends.
 
-### Datasource2: Vehicles sales and CO2 emission data
+### Datasource2: Vehicles sales
 * **Metadata URL**: [EV sales in diff states](https://www.atlasevhub.com/materials/state-ev-registration-data/#data)
 * **Dataset Direct URL**: [EV sales (CSV)](https://www.atlasevhub.com/materials/state-ev-registration-data/#data)
 * **Data Type**: CSV
