@@ -6,6 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 def download_file(url, local_path):
+    """Download a file from a URL and save it to a local path."""
     try:
         response = requests.get(url, timeout=10)  # Add timeout for better error handling
         response.raise_for_status()  # Raise an HTTPError for bad responses (4xx, 5xx)
@@ -26,16 +27,22 @@ def download_file(url, local_path):
         raise
 
 def fetch_data_from_url(url, save_to):
+    """Fetch data from a URL and save it to a local file."""
     try:
         download_file(url, save_to)
         logging.info("Data fetching and saving to file completed successfully.")
     except requests.exceptions.Timeout:
         logging.error(f"Failed to fetch data due to a timeout error.")
+        raise
     except requests.exceptions.ConnectionError:
         logging.error(f"Failed to fetch data due to a connection error.")
+        raise
     except requests.exceptions.HTTPError:
         logging.error(f"Failed to fetch data due to an HTTP error.")
+        raise
     except requests.exceptions.RequestException:
         logging.error(f"Failed to fetch data due to a general request error.")
+        raise
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
+        raise
