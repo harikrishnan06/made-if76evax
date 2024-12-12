@@ -27,6 +27,7 @@ jobs:
       run: |
         echo "Test the Pipeline "
         ls -al
+        chmod +x ./public/scripts/test.sh
         ./project/test.sh
 
  
