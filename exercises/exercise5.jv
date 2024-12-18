@@ -1,0 +1,71 @@
+ pipeline gtfsDataPipeline {
+    valuetype zoneIdAllow oftype integer {
+        constraints: [AllowValidZoneId];
+    }
+
+    valuetype geoAllow oftype decimal {
+        constraints: [AllowGeoType];
+    }
+
+    valuetype UmlautCheck oftype decimal {
+        constraints: [CheckGermanChar];
+    }
+
+
+
+ gtfsDataExtractor -> gtfsDataZipArchiveInterpreter ->gtfsDataFilePicker -> gtfsDataTextFileInterperter -> gtfsDataCSVDataInterperter -> gtfsDataTableInterperter -> DbLoad;
+    
+    block gtfsDataExtractor oftype HttpExtractor {
+       url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    }
+
+    block gtfsDataZipArchiveInterpreter oftype ArchiveInterpreter {
+       archiveType: "zip";
+    }
+
+    block gtfsDataFilePicker oftype FilePicker {
+       path: "./stops.txt";
+
+    }
+
+    block gtfsDataTextFileInterperter oftype TextFileInterpreter{}
+
+    block gtfsDataCSVDataInterperter oftype CSVInterpreter {
+       delimiter: ",";  
+       enclosing: '"';  
+    }
+
+    block gtfsDataTableInterperter oftype TableInterpreter{
+        header : true;
+        columns: [
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+             "stop_lat" oftype geoAllow ,
+              "stop_lon" oftype geoAllow ,
+               "zone_id" oftype zoneIdAllow,
+        ];
+    }
+
+
+    block DbLoad oftype SQLiteLoader {
+        table: "stops";
+        file: "./gtfs.sqlite"; 
+        dropTable: true;
+    }
+ }
+
+
+ publish constraint AllowValidZoneId on integer: value == 1925;
+
+ publish  constraint AllowGeoType oftype RangeConstraint {
+    lowerBound: -90;
+    upperBound: 90;
+    lowerBoundInclusive: true;
+    upperBoundInclusive: true;
+  }
+
+
+publish constraint CheckGermanChar oftype RegexConstraint {
+   regex: /^[A-Za-zäöüÄÖÜß]+$/;
+ 
+}
